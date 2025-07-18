@@ -1,161 +1,106 @@
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
-  <title>Apple Hex</title>
-  <style>
-    body {
-      background: #350221;
-      border: dashed 3px #f5c5d7;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      box-shadow: inset 0 0 20px #70294f, 0 0 25px #a6447a;
+   <head>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+     <title>Apple Hex</title>
+    <style>
+body{
+   background:  #350221;
+  border: dashed 3px #f5c5d7;
+   margin: 0;
+   padding: 0;
+   text-align: center;
+   box-shadow: inset 0 0 20px #70294f, 0 0 25px #a6447a;
       position: relative;
       overflow: hidden;
-    }
+}
 
-    .witch-img {
-      display: block;
-      margin: 0 auto;
-      width: 300px;
-      height: auto;
-      margin-top: 130px;
-    }
+.witch-img{
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: auto;
+    margin-top: 130px;
+}
+.apple-img{
+   width: 35px;
+   height: auto;
+   cursor: pointer;
+   box-shadow: inset;
+}
+.apple-img:hover {
+   transform: scale(1.1) translateY(-5px);}
+.h1{
+  font-family: 'UnifrakturCook', cursive;
+   color: #f5c5d7;
+   font-size: 3rem;
+   text-shadow: 0 0 8px #70294f, 0 0 15px #a6447a;
+}
+.p{
+   color: #350221;
+}
+.cat{
+   width: 50px;
+   height: auto;
+   margin-left: 180px;
+   margin-top: -125px;
+}
+.fly {
+   animation: moveToWitch 1s ease forwards;
+}
 
-    .apple-img {
-      width: 35px;
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .apple-img:hover {
-      transform: scale(1.1) translateY(-5px);
-    }
+@keyframes moveToWitch {
+  0% {
+     top: 100px;
+     transform: translateY(150px) scale(1);
+  }
+  100% {
+     top: calc(100% - 250px);
+     transform: translateY(295px) scale(0.1) ;
+  }
+}
+    </style>
+ </head>
+    <body>
+        <h1 class="h1"> ✪ </h1>
+        <p class= "p" id="counter">Apples eaten: 0</p>
+<img src="images/apple.jpg" class="apple-img" id="apple" >
+<audio id="crunchSound" src="crunch.wav"></audio>
+<img src="images/sad witch.png" class="witch-img" id="witch">
+<img src="images/cat.png" class="cat">
+<audio id="yum" src="yum.crdownload"></audio>
+   <script src="script.js"></script>
 
-    .h1 {
-      font-family: 'UnifrakturCook', cursive;
-      color: #f5c5d7;
-      font-size: 3rem;
-      text-shadow: 0 0 8px #70294f, 0 0 15px #a6447a;
-    }
+    </body>
+    
+    <script>
+  let applesEaten = 0;
+  const apple = document.getElementById("apple");
+  const witch = document.getElementById("witch");
+  const counter = document.getElementById("counter");
+  const crunchSound = document.getElementById("crunchSound");
+  const yum = document.getElementById("yum");
 
-    .p {
-      color: #350221;
-      font-size: 1.2rem;
-    }
+  apple.addEventListener("click", () => {
+    apple.classList.add("fly");
 
-    .cat {
-      width: 50px;
-      height: auto;
-      margin-left: 180px;
-      margin-top: -125px;
-    }
+     crunchSound.currentTime = 0;
+  crunchSound.play();
+    setTimeout(() => {
+      applesEaten++;
+      counter.innerText = `Apples eaten: ${applesEaten}`;
+      apple.classList.remove("fly");
 
-    .fly {
-      animation: moveToWitch 1s ease forwards;
-    }
-
-    @keyframes moveToWitch {
-      0% {
-        top: 100px;
-        transform: translateY(150px) scale(1);
+      if (applesEaten === 3) {
+        witch.src = "images/happy correct.png";
+        apple.style.display = "none"; 
+        yum.currentTime = 0;
+        yum.play();
+        setTimeout(() => {
+  yum.pause();
+yum.currentTime = 0; 
+}, 4000);
       }
-      100% {
-        top: calc(100% - 250px);
-        transform: translateY(295px) scale(0.1);
-      }
-    }
-
-    /* 📱 Tablets */
-    @media (max-width: 768px) {
-      .h1 {
-        font-size: 2.2rem;
-      }
-      .witch-img {
-        width: 220px;
-        margin-top: 100px;
-      }
-      .apple-img {
-        width: 30px;
-      }
-      .cat {
-        width: 40px;
-        margin-left: 130px;
-        margin-top: -100px;
-      }
-      .p {
-        font-size: 1rem;
-      }
-    }
-
-    /* 📱 Small phones */
-    @media (max-width: 480px) {
-      .h1 {
-        font-size: 1.8rem;
-      }
-      .witch-img {
-        width: 180px;
-        margin-top: 80px;
-      }
-      .apple-img {
-        width: 25px;
-      }
-      .cat {
-        width: 35px;
-        margin-left: 90px;
-        margin-top: -80px;
-      }
-      .p {
-        font-size: 0.9rem;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <h1 class="h1"> ✪ </h1>
-  <p class="p" id="counter">Apples eaten: 0</p>
-
-  <img src="images/apple.jpg" class="apple-img" id="apple">
-  <audio id="crunchSound" src="crunch.wav"></audio>
-
-  <img src="images/sad witch.png" class="witch-img" id="witch">
-  <img src="images/cat.png" class="cat">
-
-  <audio id="yum" src="yum.crdownload"></audio>
-
-  <script>
-    let applesEaten = 0;
-    const apple = document.getElementById("apple");
-    const witch = document.getElementById("witch");
-    const counter = document.getElementById("counter");
-    const crunchSound = document.getElementById("crunchSound");
-    const yum = document.getElementById("yum");
-
-    apple.addEventListener("click", () => {
-      apple.classList.add("fly");
-
-      crunchSound.currentTime = 0;
-      crunchSound.play();
-
-      setTimeout(() => {
-        applesEaten++;
-        counter.innerText = `Apples eaten: ${applesEaten}`;
-        apple.classList.remove("fly");
-
-        if (applesEaten === 3) {
-          witch.src = "images/happy correct.png";
-          apple.style.display = "none";
-          yum.currentTime = 0;
-          yum.play();
-          setTimeout(() => {
-            yum.pause();
-            yum.currentTime = 0;
-          }, 4000);
-        }
-      }, 1000);
-    });
-  </script>
-</body>
-</html>
+    }, 1000);
+  });
+    </script>
+</html> 
