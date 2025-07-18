@@ -2,9 +2,6 @@
 
 A cute **gothic mini web game** where a witch eats enchanted apples.  
 Click the apple, hear a crunch, and watch the witch transform!  
-
-![Witch Preview](images/sad%20witch.png)
-
 ---
 
 ## 🖤 Features  
